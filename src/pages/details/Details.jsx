@@ -9,16 +9,13 @@ import VideosSection from "./videoSection/VideoSection";
 import Similar from "./carousels/Similar";
 import Recommendation from "./carousels/Recommendation";
 
-
 const Details = () => {
-    const { mediaType } = useParams();
+  const { mediaType, id } = useParams();
 
-  const {id } = useParams();
-
- const { data, loading } = useFetch(`/${"movie"}/${id}/videos`);
- const { data: credits, loading: creditsLoading } = useFetch(
-   `/${"movie"}/${id}/credits`
- );
+  const { data, loading } = useFetch(`/${mediaType}/${id}/videos`);
+  const { data: credits, loading: creditsLoading } = useFetch(
+    `/${mediaType}/${id}/credits`
+  );
   return (
     <div>
       <DetailsBanner video={data?.results?.[0]} crew={credits?.crew} />
@@ -31,4 +28,3 @@ const Details = () => {
 };
 
 export default Details;
-
