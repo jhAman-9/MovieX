@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { fetchDataFromApi } from "./utils/api";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { getApiConfiguration, getGenres } from "./store/homeSlice";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
@@ -14,8 +14,6 @@ import PageNotFound from "./pages/404/PageNotFound";
 
 const App = () => {
   const dispatch = useDispatch();
-  const { url } = useSelector((state) => state.home);
-  console.log(url);
 
   useEffect(() => {
     apiConfig();
