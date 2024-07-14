@@ -182,6 +182,14 @@
     border-radius: 50%; // makes the image circular
     border: 3px solid #fff; // white border
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); // shadow for depth
+
+    transition: all ease 0.2s;
+    &:hover {
+      cursor: pointer;
+      border: 4px solid var(--pink);
+      box-shadow: 0 0 0.625em var(--pink);
+      color: var(--pink);
+    }
   }
 
   .sign-out {
