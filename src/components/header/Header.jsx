@@ -8,6 +8,9 @@ import "./style.scss";
 
 import ContentWrapper from "../contentWrapper/ContentWrapper";
 import logo from "../../assets/movix-logo.svg";
+import { useSelector } from "react-redux";
+import useSignOut from "../../hooks/useSignOut";
+import useOnAuthSignInSignUp from "../../hooks/useOnAuthSignInSignUp";
 
 const Header = () => {
   const [show, setShow] = useState("top");
@@ -17,24 +20,25 @@ const Header = () => {
   const [showSearch, setShowSearch] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
+  const user = useSelector((store) => store.user);
 
   // page change then scroll start from 0
   useEffect(() => {
     window.scrollTo(0, 0);
-  },[location])
+  }, [location]);
 
-   const controlNavbar = () => {
-     if (window.scrollY > 200) {
-       if (window.scrollY > lastScrollY && !mobileMenu) {
-         setShow("hide");
-       } else {
-         setShow("show");
-       }
-     } else {
-       setShow("top");
-     }
-     setLastScrollY(window.scrollY);
-   };
+  const controlNavbar = () => {
+    if (window.scrollY > 200) {
+      if (window.scrollY > lastScrollY && !mobileMenu) {
+        setShow("hide");
+      } else {
+        setShow("show");
+      }
+    } else {
+      setShow("top");
+    }
+    setLastScrollY(window.scrollY);
+  };
 
   useEffect(() => {
     window.addEventListener("scroll", controlNavbar);
@@ -42,7 +46,6 @@ const Header = () => {
       window.removeEventListener("scroll", controlNavbar);
     };
   }, [lastScrollY]);
-  
 
   const searchQueryHandler = (event) => {
     if (event.key === "Enter" && query.length > 0) {
@@ -63,21 +66,24 @@ const Header = () => {
     setShowSearch(false);
   };
 
-
   const navigationHandler = (type) => {
-    if (type === 'movie') {
-      navigate('/explore/movie')
-    }
-    else {
-      navigate('/explore/tv')
+    if (type === "movie") {
+      navigate("/explore/movie");
+    } else {
+      navigate("/explore/tv");
     }
     setMobileMenu(false);
-  }
+  };
 
+  // when user click on sign out
+  const handleSignOut = useSignOut();
+
+  // when user sign in and sign, it will check auth the login or sign up (read firebase DOCS "onAuthStateChanged")
+  useOnAuthSignInSignUp();
   return (
     <header className={`header ${mobileMenu ? "mobileView" : ""} ${show}`}>
       <ContentWrapper>
-        <div className="logo" onClick={() => navigate('/')}>
+        <div className="logo" onClick={() => navigate("/")}>
           <img src={logo} alt="" />
         </div>
         <ul className="menuItems">
@@ -88,7 +94,7 @@ const Header = () => {
             Tv Shows
           </li>
           <li className="menuItem">
-            <HiOutlineSearch onClick={openSearch}/>
+            <HiOutlineSearch onClick={openSearch} />
           </li>
         </ul>
 
@@ -115,6 +121,18 @@ const Header = () => {
               <VscChromeClose onClick={() => setShowSearch(false)} />
             </div>
           </ContentWrapper>
+        </div>
+      )}
+
+      {user && (
+        <div className="avatar">
+          <img className="rounded-xl m-2" alt="userIcon" src={user?.photoURL} />
+          <button
+            className="sign-out font-bold text-white m-2"
+            onClick={handleSignOut}
+          >
+            (Sign Out)
+          </button>
         </div>
       )}
     </header>

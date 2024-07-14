@@ -141,6 +141,43 @@
     }
 }
 
+.avatar {
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  border-radius: 12px; // slightly rounded corners
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); // subtle shadow
+
+  img {
+    height: 50px; // larger size
+    border-radius: 50%; // makes the image circular
+    border: 3px solid #fff; // white border
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); // shadow for depth
+  }
+
+  .sign-out {
+    margin-left: 1rem;
+    padding: 10px 20px;
+    background-color: #ff6347; // tomato color
+    color: #fff; // white text
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: #e5533d; // darken color on hover
+    }
+  }
+}
+
+
+
+
 @keyframes mobileMenu {
     0% {
         transform: translateY(-130%);
