@@ -98,6 +98,7 @@ const Header = () => {
         <div className="logo" onClick={() => navigate("/")}>
           <img src={logo} alt="" />
         </div>
+        {!user && <p className="text">Welcome ! To the World Of Entertenment.</p>}
         {user ? (
           <ul className="menuItems">
             <li className="menuItem" onClick={() => navigationHandler("movie")}>

@@ -56,6 +56,11 @@
   .toggle-form {
     padding: 1rem 0;
     cursor: pointer;
+
+    &:hover {
+      color: var(--pink);
+      font-size: large;
+    }
   }
 }
 
