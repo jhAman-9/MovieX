@@ -9,7 +9,7 @@
 .login-form {
   width: 25%;
   padding: 3rem;
-  background-color: rgba(0, 0, 0, 0.85);
+  background-color: rgba(0, 0, 0, 0.50);
   margin: 6rem auto;
   right: 0;
   left: 0;
@@ -23,6 +23,7 @@
   }
 
   .login-input {
+    color: #fff;
     padding: 1rem;
     margin: 1rem 0;
     width: 100%;
@@ -36,7 +37,7 @@
   .login-button {
     padding: 1rem 0;
     margin: 1rem 0;
-    background-color: #e53e3e;
+    background: var(--gradient);
     width: 100%;
   }
 
@@ -44,6 +45,7 @@
     padding: 1rem 0;
     cursor: pointer;
   }
+
 }
 
 /* Tablet (portrait and landscape) */

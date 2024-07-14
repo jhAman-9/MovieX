@@ -8,9 +8,10 @@ import "./style.scss";
 
 import ContentWrapper from "../contentWrapper/ContentWrapper";
 import logo from "../../assets/movix-logo.svg";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import useSignOut from "../../hooks/useSignOut";
 import useOnAuthSignInSignUp from "../../hooks/useOnAuthSignInSignUp";
+import { toggleUser } from "../../store/loginSlice";
 
 const Header = () => {
   const [show, setShow] = useState("top");
@@ -20,7 +21,18 @@ const Header = () => {
   const [showSearch, setShowSearch] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
+
   const user = useSelector((store) => store.user);
+
+  const { showLogin } = useSelector((store) => store.login);
+
+  const dispatch = useDispatch();
+
+
+  const handleSignInClick = () => {
+    dispatch(toggleUser());
+  }
+
 
   // page change then scroll start from 0
   useEffect(() => {
@@ -86,17 +98,25 @@ const Header = () => {
         <div className="logo" onClick={() => navigate("/")}>
           <img src={logo} alt="" />
         </div>
-        <ul className="menuItems">
-          <li className="menuItem" onClick={() => navigationHandler("movie")}>
-            Movies
-          </li>
-          <li className="menuItem" onClick={() => navigationHandler("tv")}>
-            Tv Shows
-          </li>
-          <li className="menuItem">
-            <HiOutlineSearch onClick={openSearch} />
-          </li>
-        </ul>
+        {user ? (
+          <ul className="menuItems">
+            <li className="menuItem" onClick={() => navigationHandler("movie")}>
+              Movies
+            </li>
+            <li className="menuItem" onClick={() => navigationHandler("tv")}>
+              Tv Shows
+            </li>
+            <li className="menuItem">
+              <HiOutlineSearch onClick={openSearch} />
+            </li>
+          </ul>
+        ) : (
+          <div className="toggle">
+            <button className="login-button" onClick={handleSignInClick}>
+              {showLogin ? "Sign In" : "Sign Up"}
+            </button>
+          </div>
+        )}
 
         <div className="mobileMenuItems">
           <HiOutlineSearch onClick={openSearch} />
@@ -124,7 +144,7 @@ const Header = () => {
         </div>
       )}
 
-      {user && (
+      {user && !user && (
         <div className="avatar">
           <img className="rounded-xl m-2" alt="userIcon" src={user?.photoURL} />
           <button

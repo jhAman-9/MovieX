@@ -4,25 +4,27 @@ import {
   signInWithEmailAndPassword,
   updateProfile,
 } from "firebase/auth";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import "./style.scss";
 import { auth } from "../../utils/firebase";
 import { checkValidData } from "../../utils/validateFormData";
 import { userAvater } from "../../utils/constants";
-import { addUser } from "../../store/userSlice";
+import { addUser} from "../../store/userSlice";
+import { toggleUser } from "../../store/loginSlice";
 
 const Login = () => {
   const dispatch = useDispatch();
-  const [isSignIn, setIsSignIn] = useState(true); // sign in sign up form change
   const [errorMess, setErrorMess] = useState(null);
 
   const name = useRef(null);
   const email = useRef(null);
   const password = useRef(null);
-
+ 
   const handleSignInForm = () => {
-    setIsSignIn(!isSignIn);
+    dispatch(toggleUser());
   };
+
+  const { showLogin } = useSelector((store) => store.login);
 
   const handleButtonClick = () => {
     const mess = checkValidData(email.current.value, password.current.value);
@@ -31,7 +33,7 @@ const Login = () => {
     // mess !== null means some error in login data validation return;
     if (mess !== null) return;
 
-    if (!isSignIn) {
+    if (!showLogin) {
       // create a new user (sign un)
 
       createUserWithEmailAndPassword(
@@ -49,7 +51,7 @@ const Login = () => {
             .then(() => {
               const { uid, email, displayName, photoURL } = auth.currentUser;
               dispatch(
-                addUser ({
+                addUser({
                   uid: uid,
                   email: email,
                   displayName: displayName,
@@ -58,7 +60,7 @@ const Login = () => {
               );
             })
             .catch((error) => {
-               console.log(error);
+              console.log(error);
             });
         })
         .catch((error) => {
@@ -88,9 +90,9 @@ const Login = () => {
     <div>
       <div className="main">
         <form onSubmit={(e) => e.preventDefault()} className="login-form">
-          <h1 className="login-title">{isSignIn ? "Sign In" : "Sign Up"}</h1>
+          <h1 className="login-title">{showLogin ? "Sign In" : "Sign Up"}</h1>
 
-          {!isSignIn && (
+          {!showLogin && (
             <input
               ref={name}
               className="login-input"
@@ -115,11 +117,11 @@ const Login = () => {
           <p className="error-message">{errorMess}</p>
 
           <button className="login-button" onClick={handleButtonClick}>
-            {isSignIn ? "Sign In" : "Sign Up"}
+            {showLogin ? "Sign In" : "Sign Up"}
           </button>
 
           <p className="toggle-form" onClick={handleSignInForm}>
-            {isSignIn
+            {showLogin
               ? "New to Movix? Sign Up Now"
               : "Have an Account? Sign In Now"}
           </p>
