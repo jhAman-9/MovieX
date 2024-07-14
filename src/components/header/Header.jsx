@@ -144,7 +144,7 @@ const Header = () => {
         </div>
       )}
 
-      {user && !user && (
+      {user && (
         <div className="avatar">
           <img className="rounded-xl m-2" alt="userIcon" src={user?.photoURL} />
           <button
