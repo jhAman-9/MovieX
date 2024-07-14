@@ -36,7 +36,14 @@
   .text {
     font-size: larger;
     color: #fff;
-    cursor: pointer;
+    transition: all ease 0.2s;
+    &:hover {
+      font-size: x-large;
+      cursor: pointer;
+      border: 3px solid var(--pink);
+      box-shadow: 0 0 0.625em var(--pink);
+      color: var(--pink);
+    }
   }
   :hover {
     font: bold;
@@ -182,7 +189,6 @@
     border-radius: 50%; // makes the image circular
     border: 3px solid #fff; // white border
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); // shadow for depth
-
     transition: all ease 0.2s;
     &:hover {
       cursor: pointer;
