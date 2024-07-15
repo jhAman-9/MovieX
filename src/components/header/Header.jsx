@@ -95,11 +95,16 @@ const Header = () => {
   return (
     <header className={`header ${mobileMenu ? "mobileView" : ""} ${show}`}>
       <ContentWrapper>
-        <div className="logo" onClick={() => navigate("/")}>
+        {user && <div className="logo" onClick={() => navigate("/home")}>
           <img src={logo} alt="" />
-        </div>
+        </div>}
         {!user && (
-          <p className="text">Welcome ! To the World Of Entertainment.</p>
+          <>
+            <div className="logo" onClick={() => navigate("/")}>
+              <img src={logo} alt="" />
+            </div>
+            <p className="text">Welcome ! To the World Of Entertainment.</p>
+          </>
         )}
         {user ? (
           <ul className="menuItems">
