@@ -16,6 +16,8 @@ import SearchResult from "./pages/searchResult/SearchResult";
 import Explore from "./pages/explore/Explore";
 import PageNotFound from "./pages/404/PageNotFound";
 import Login from "./pages/logIn/Login";
+// import { appRouter } from "./utils/routingApp";
+// import { RouterProvider } from "react-router-dom";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -60,20 +62,30 @@ const App = () => {
 
  
 
-  return (
-    <BrowserRouter>
-      <Header />
-      <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/:mediaType/:id" element={<Details />} />
-        <Route path="/search/:query" element={<SearchResult />} />
-        <Route path="/explore/:mediaType" element={<Explore />} />
-        <Route path="*" element={<PageNotFound />} />
-      </Routes>
-      <Footer />
-    </BrowserRouter>
-  );
-};
+    return (
+      <BrowserRouter>
+        <Header />
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/:mediaType/:id" element={<Details />} />
+          <Route path="/search/:query" element={<SearchResult />} />
+          <Route path="/explore/:mediaType" element={<Explore />} />
+          <Route path="*" element={<PageNotFound />} />
+        </Routes>
+        <Footer />
+      </BrowserRouter>
+    );
+  };
+  
+
+//   return (
+//     <div>
+//       <Header />
+//       <RouterProvider router={appRouter} />
+//       <Footer/>
+//     </div>
+//   )
+// };
 
 export default App;

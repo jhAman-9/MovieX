@@ -2,19 +2,20 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getAuth } from "firebase/auth";
+
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyAbw-auBqsqq-P1ukCTrn5Pkz0dj0c6iq0",
-  authDomain: "movix-adfcd.firebaseapp.com",
-  projectId: "movix-adfcd",
-  storageBucket: "movix-adfcd.appspot.com",
-  messagingSenderId: "1044060398384",
-  appId: "1:1044060398384:web:7849dd0de04fb3c9051ef5",
-  measurementId: "G-TVRWT1PFS8",
+  apiKey: "AIzaSyDNmInyxIcJOHfDS1gN8oAINyy0CdFI9vs",
+  authDomain: "movix-eebe8.firebaseapp.com",
+  projectId: "movix-eebe8",
+  storageBucket: "movix-eebe8.appspot.com",
+  messagingSenderId: "433529608748",
+  appId: "1:433529608748:web:d511b2c5ed96257bfd0f89",
+  measurementId: "G-QZNWHQ5HQM",
 };
 
 // Initialize Firebase
